@@ -1,43 +1,45 @@
-import React, { Component } from 'react';
-import Form from './Form/Form';
-import Filter from './Filter/Filter';
-import ContactList from './ContactList/ContactList';
+import React, { Component } from "react";
+import Form from "./Form/Form";
+import Filter from "./Filter/Filter";
+import ContactList from "./ContactList/ContactList";
 
 class App extends Component {
   state = {
     contacts: [],
-    filter: '',
+    filter: "",
   };
 
   componentDidMount() {
-    const parsedContacts = JSON.parse(localStorage.getItem('contacts'));
-    this.setState({ contacts: parsedContacts });
+    const parsedContacts = JSON.parse(localStorage.getItem("contacts"));
+    parsedContacts && this.setState({ contacts: parsedContacts });
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (this.state.contacts !== prevState.contacts) {
-      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+      localStorage.setItem("contacts", JSON.stringify(this.state.contacts));
     }
   }
 
-  formSubmitHandler = data => {
+  formSubmitHandler = (data) => {
     this.setState({ contacts: [...this.state.contacts, data] });
   };
 
-  contactFind = name => {
+  contactFind = (name) => {
     return this.state.contacts.some(
-      contact => contact.name.toLowerCase() === name.toLowerCase()
+      (contact) => contact.name.toLowerCase() === name.toLowerCase()
     );
     // console.log(name);
   };
 
-  changeFilter = e => {
+  changeFilter = (e) => {
     this.setState({ filter: e.currentTarget.value });
   };
 
-  deleteContact = contactId => {
-    this.setState(prevState => ({
-      contacts: prevState.contacts.filter(contact => contact.id !== contactId),
+  deleteContact = (contactId) => {
+    this.setState((prevState) => ({
+      contacts: prevState.contacts.filter(
+        (contact) => contact.id !== contactId
+      ),
     }));
   };
 
