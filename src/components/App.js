@@ -28,7 +28,6 @@ class App extends Component {
     return this.state.contacts.some(
       (contact) => contact.name.toLowerCase() === name.toLowerCase()
     );
-    // console.log(name);
   };
 
   changeFilter = (e) => {
